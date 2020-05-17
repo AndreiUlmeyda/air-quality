@@ -6,15 +6,24 @@
   
 SCD30 airSensor;
 
+void calibrateSensor(){
+  // measurement interval in seconds
+  airSensor.setMeasurementInterval(4);
+  // approx. altitude of Dresden, Saxony in meters
+  airSensor.setAltitudeCompensation(112); 
+  // approx. avg. pressure in Dresden, Saxony in mBar
+  airSensor.setAmbientPressure(1020); 
+  // estimated temperature difference between the sensor and its
+  // surroundings that would be caused by self heating during operation 
+  airSensor.setTemperatureOffset(2);
+}
+
 void startSensor(){
   bool sensorReady = airSensor.begin();
-  if (!sensorReady)
-  {
-    Serial.println("Sensor wiring/setup faulty. Not continuing...");
-    while (1)
-      ;
+  if (!sensorReady){
+    Serial.println("Sensor wiring or setup faulty. Not continuing...");
+    while (true) {;}
   }
-
 }
 
 void setupI2C(){
@@ -23,8 +32,7 @@ void setupI2C(){
 
 void waitForWifiConnection(){
   Serial.print("Connecting to Wifi");
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  while (WiFi.status() != WL_CONNECTED){
     delay(500);
     Serial.print(".");
   }
@@ -47,12 +55,14 @@ void startSerialConnection() {
   waitForSerialConnection();
 }
 
+// entry point
 void setup() {
   startSerialConnection();
   startWifiConnection();
   setupI2C();
 
   startSensor();
+  calibrateSensor();
 }
 
 void loop() {
