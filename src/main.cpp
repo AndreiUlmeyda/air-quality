@@ -9,7 +9,10 @@
 SCD30 airSensor;
 
 void buildAndSendHttpRequestWithMeasurement(HttpClient *httpClient, int co2, int temperature, int humidity) {
+  String httpQuerySeparator = String("&");
   String path = "/write?db=" + String(databaseName);
+  path = httpQuerySeparator + path + String("u=") + String(DB_USER) + httpQuerySeparator;
+  path = path + String("p=") + String(DB_PWD);
   String contentType = "application/json";
   String fieldSeparator = String(",");
   String content = "air-quality co2=" + String(co2) + fieldSeparator;
