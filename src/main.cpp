@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Config.hpp>
 #include <Secrets.hpp>
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
 #include <ArduinoHttpClient.h>
 #include <Wire.h>
 #include "SparkFun_SCD30_Arduino_Library.h"
@@ -47,7 +47,7 @@ void sendSensorDataToServer(int co2, int temperature, int humidity){
 
 void calibrateSensor(){
   // measurement interval in seconds
-  airSensor.setMeasurementInterval(4);
+  airSensor.setMeasurementInterval(2);
   // approx. altitude of Dresden, Saxony in meters
   airSensor.setAltitudeCompensation(112); 
   // approx. avg. pressure in Dresden, Saxony in mBar
@@ -81,7 +81,7 @@ void waitForWifiConnection(){
 }
 
 void startWifiConnection(){
-  WiFi.begin(SSID, PWD);
+  WiFi.begin(WIFI_SSID, WIFI_PWD);
   waitForWifiConnection();
 }
 
@@ -97,7 +97,7 @@ void startSerialConnection() {
 // entry point
 void setup() {
   startSerialConnection();
-  startWifiConnection();
+  //startWifiConnection();
   setupI2C();
   startSensor();
   calibrateSensor();
@@ -112,6 +112,11 @@ void loop() {
 
     int temperature = airSensor.getTemperature();
     int humidity = airSensor.getHumidity();
-    sendSensorDataToServer(co2, temperature, humidity);
+
+    // sendSensorDataToServer(co2, temperature, humidity);
+    
+    char serialOutput[30];
+    sprintf(serialOutput, "tmp: %d hum: %d co2: %d", temperature, humidity, co2);
+    Serial.println(serialOutput);
   }
 }
