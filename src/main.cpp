@@ -107,9 +107,6 @@ void loop() {
   if (airSensor.dataAvailable())
   {
     int co2 = airSensor.getCO2();
-
-    int co2 = co2 - 150; // dropped the darn thing, measurements is probably shifted upwards a bit
-
     int temperature = airSensor.getTemperature();
     int humidity = airSensor.getHumidity();
 
