@@ -51,7 +51,7 @@ void calibrateSensor(){
   // approx. altitude of Dresden, Saxony in meters
   airSensor.setAltitudeCompensation(112); 
   // approx. avg. pressure in Dresden, Saxony in mBar
-  airSensor.setAmbientPressure(1020); 
+  airSensor.setAmbientPressure(1020);
   // estimated temperature difference between the sensor and its
   // surroundings that would be caused by self heating during operation 
   airSensor.setTemperatureOffset(2);
@@ -107,13 +107,19 @@ void loop() {
   if (airSensor.dataAvailable())
   {
     int co2 = airSensor.getCO2();
-    int temperature = airSensor.getTemperature();
-    int humidity = airSensor.getHumidity();
+    String temperature = String(airSensor.getTemperature());
+    String humidity = String(airSensor.getHumidity());
+    int magneticFieldStrength = hallRead();
 
     // sendSensorDataToServer(co2, temperature, humidity);
     
-    char serialOutput[30];
-    sprintf(serialOutput, "tmp: %d hum: %d co2: %d", temperature, humidity, co2);
+    char serialOutput[80];
+    sprintf(serialOutput,
+      "air-quality co2=%d,temperature=%s,humidity=%s,magnetic-field-strength=%d",
+      co2,
+      temperature,
+      humidity,
+      magneticFieldStrength);
     Serial.println(serialOutput);
   }
 }
