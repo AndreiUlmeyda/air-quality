@@ -12,7 +12,7 @@ void buildAndSendHttpRequestWithMeasurement(HttpClient *httpClient, int co2, int
   String httpQuerySeparator = String("&");
   String path = "/write?db=" + String(databaseName);
   path = httpQuerySeparator + path + String("u=") + String(DB_USER) + httpQuerySeparator;
-  path = path + String("p=") + String(DB_PWD);
+  path = path + String("p=") + String(DB_PW);
   String contentType = "application/json";
   String fieldSeparator = String(",");
   String content = "air-quality co2=" + String(co2) + fieldSeparator;
@@ -113,9 +113,10 @@ void loop() {
 
     // sendSensorDataToServer(co2, temperature, humidity);
     
-    char serialOutput[80];
+    char serialOutput[95];
     sprintf(serialOutput,
-      "air-quality co2=%d,temperature=%s,humidity=%s,magnetic-field-strength=%d",
+      "air-quality,location=%s co2=%d,temperature=%s,humidity=%s,magnetic-field-strength=%d",
+      measurementLocation,
       co2,
       temperature,
       humidity,
