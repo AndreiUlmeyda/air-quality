@@ -6,3 +6,7 @@
 .travis.yml
 .vscode/extensions.json
 include/Secrets.hpp
+*.png
+*css
+*html
+*.md
