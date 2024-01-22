@@ -110,16 +110,25 @@ void drawCO2(int co2Concentration)
 
 void drawTemperature(float temperature)
 {
+  float tempOffsetToMatchReferenceSensor = -4.9;
+
+  float correctedTemperature = temperature + tempOffsetToMatchReferenceSensor;
+
+  display.fillRect(49, 49, 48, 16, black);
+  display.setTextColor(yellow);
+  display.setCursor(40, 50); // (long side, short side)
+  display.setTextSize(2);
+  String firstFourCharacters = String(correctedTemperature).substring(0, 4);
+  display.print(firstFourCharacters);
 }
 
 void drawHumidity(float humidity)
 {
-  display.fillRect(0, 49, 96, 16, black);
+  display.fillRect(0, 49, 34, 16, black);
   display.setTextColor(blue);
-  display.setCursor(5, 50); // (long side, short side)
+  display.setCursor(8, 50); // (long side, short side)
   display.setTextSize(2);
   display.print(int(round(humidity)));
-  display.print('%');
 }
 
 void loop()
