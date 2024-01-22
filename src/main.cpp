@@ -28,12 +28,12 @@ void calibrateSensor()
   // measurement interval in seconds
   airSensor.setMeasurementInterval(2);
   // approx. altitude of Dresden, Saxony in meters
-  airSensor.setAltitudeCompensation(112);
+  airSensor.setAltitudeCompensation(260);
   // approx. avg. pressure in Dresden, Saxony in mBar
-  airSensor.setAmbientPressure(1020);
+  airSensor.setAmbientPressure(1030);
   // estimated temperature difference between the sensor and its
   // surroundings that would be caused by self heating during operation
-  airSensor.setTemperatureOffset(2);
+  airSensor.setTemperatureOffset(1);
 }
 
 void startSensor()
