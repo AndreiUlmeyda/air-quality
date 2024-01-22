@@ -71,7 +71,7 @@ void startSerialConnection()
 void startDisplay()
 {
   display.begin();
-  display.fillScreen(green);
+  display.fillScreen(black);
 }
 
 // entry point
@@ -84,20 +84,55 @@ void setup()
   startDisplay();
 }
 
+void drawCO2(int co2Concentration)
+{
+  int COLOR_LOW = green;
+
+  int THRESHOLD_MEDIUM = 1000;
+  int COLOR_MEDIUM = yellow;
+
+  int THRESHOLD_HIGH = 2000;
+  int COLOR_HIGH = red;
+
+  int drawColor = COLOR_LOW;
+  if (co2Concentration >= THRESHOLD_MEDIUM)
+    drawColor = COLOR_MEDIUM;
+  if (co2Concentration >= THRESHOLD_HIGH)
+    drawColor = COLOR_HIGH;
+
+  display.fillRect(0, 0, 96, 48, drawColor);
+
+  display.setTextColor(black);
+  display.setCursor(15, 15); // (long side, short side)
+  display.setTextSize(3);
+  display.print(co2Concentration);
+}
+
+void drawTemperature(float temperature)
+{
+}
+
+void drawHumidity(float humidity)
+{
+}
+
 void loop()
 {
   if (airSensor.dataAvailable())
   {
     int co2 = airSensor.getCO2();
-    String temperature = String(airSensor.getTemperature());
-    String humidity = String(airSensor.getHumidity());
+    float temperature = airSensor.getTemperature();
+    float humidity = airSensor.getHumidity();
+
+    drawCO2(co2);
+    drawTemperature(temperature);
 
     char serialOutput[95];
     sprintf(serialOutput,
             "co2=%d,temperature=%s,humidity=%s",
             co2,
-            temperature,
-            humidity);
+            String(temperature),
+            String(humidity));
     Serial.println(serialOutput);
   }
 }
