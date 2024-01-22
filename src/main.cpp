@@ -114,6 +114,12 @@ void drawTemperature(float temperature)
 
 void drawHumidity(float humidity)
 {
+  display.fillRect(0, 49, 96, 16, black);
+  display.setTextColor(blue);
+  display.setCursor(5, 50); // (long side, short side)
+  display.setTextSize(2);
+  display.print(int(round(humidity)));
+  display.print('%');
 }
 
 void loop()
@@ -126,6 +132,7 @@ void loop()
 
     drawCO2(co2);
     drawTemperature(temperature);
+    drawHumidity(humidity);
 
     char serialOutput[95];
     sprintf(serialOutput,
