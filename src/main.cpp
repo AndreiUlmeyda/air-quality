@@ -114,7 +114,7 @@ void drawTemperature(float temperature)
 
   float correctedTemperature = temperature + tempOffsetToMatchReferenceSensor;
 
-  display.fillRect(49, 49, 48, 16, black);
+  display.fillRect(40, 48, 56, 24, black);
   display.setTextColor(yellow);
   display.setCursor(40, 50); // (long side, short side)
   display.setTextSize(2);
