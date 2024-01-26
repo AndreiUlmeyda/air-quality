@@ -117,7 +117,7 @@ void drawCO2(int co2Concentration)
 
 void drawTemperature(float temperature)
 {
-  float tempOffsetToMatchReferenceSensor = -4.9;
+  float tempOffsetToMatchReferenceSensor = 0;
 
   float correctedTemperature = temperature + tempOffsetToMatchReferenceSensor;
 
