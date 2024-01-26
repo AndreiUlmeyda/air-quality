@@ -6,11 +6,11 @@
 SCD30 airSensor;
 
 // https://digilent.com/reference/pmod/pmodoledrgb/start
-#define CS 4    // chip select
-#define DC 21   // data/command control
-#define MOSI 18 // master-out slave-in
-#define SCK 5   // serial clock
-#define RES 14  // power reset
+#define CS 4    // chip select // device pin 1
+#define DC 21   // data/command control // device pin 7
+#define MOSI 18 // master-out slave-in // device pin 2
+#define SCK 5   // serial clock // device pin 4
+#define RES 14  // power reset // device pin 8 // esp NC
 
 Adafruit_SSD1331 display = Adafruit_SSD1331(CS, DC, MOSI, SCK, RES);
 
