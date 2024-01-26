@@ -104,7 +104,14 @@ void drawCO2(int co2Concentration)
 
   display.setTextColor(black);
   display.setCursor(15, 15); // (long side, short side)
+
   display.setTextSize(3);
+
+  if (co2Concentration >= 10000)
+  {
+    display.setTextSize(2);
+  }
+
   display.print(co2Concentration);
 }
 
