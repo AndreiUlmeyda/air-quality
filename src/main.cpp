@@ -88,10 +88,10 @@ void drawCO2(int co2Concentration)
 {
   int COLOR_LOW = green;
 
-  int THRESHOLD_MEDIUM = 1000;
+  int THRESHOLD_MEDIUM = 1200;
   int COLOR_MEDIUM = yellow;
 
-  int THRESHOLD_HIGH = 2000;
+  int THRESHOLD_HIGH = 2500;
   int COLOR_HIGH = red;
 
   int drawColor = COLOR_LOW;
