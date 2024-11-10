@@ -11,6 +11,7 @@ SCD30 airSensor;
 #define MOSI 18 // master-out slave-in // device pin 2
 #define SCK 5   // serial clock // device pin 4
 #define RES 14  // power reset // device pin 8 // esp NC
+// dont forget vcc/gnd on the display and vccen/pmodgen to logic high
 
 Adafruit_SSD1331 display = Adafruit_SSD1331(CS, DC, MOSI, SCK, RES);
 
